@@ -261,6 +261,7 @@ def run_main(listen_fd):
  
     params = {}
  
+    IP_POOL = ['10.25.11.40', '10.25.11.50']
     last_min_time = -1
     while True:
         epoll_list = epoll_fd.poll()
@@ -271,6 +272,11 @@ def run_main(listen_fd):
                 while True:
                     try:
                         conn, addr = listen_fd.accept()
+                        ip,port = addr
+                        print('src ip:' + ip)
+                        if ip not in IP_POOL:
+                            print('src ip:%s not Allowed' %(ip))
+                            break
                         conn.setblocking(0)
                         epoll_fd.register(conn.fileno(), select.EPOLLIN | select.EPOLLERR | select.EPOLLHUP)
                         conn.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
