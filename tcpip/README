@@ -1,0 +1,6 @@
+本项目用于实现TCP/UDP服务相关的代码
+主要有：
+1.tcp server/client
+2.udp server/client
+3.物联网相关的协议COAP和MQTT的简单使用
+4.简单的web搭建（flask）
